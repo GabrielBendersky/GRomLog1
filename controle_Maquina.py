@@ -8,22 +8,27 @@
 #◆ Caso contrário, o sistema deve exibir "Acesso Bloqueado".
 
 
+
+# Coleta de dados 
+cargo_usuario = input("Digite o cargo (operador/supervisor): ")
+hora_usuario = int(input("Digite a hora atual (0 a 23): "))
+chave_emergencia = input("A chave de emergência está ativa? (s/n): "). strip().lower() == "S"
+
+
+
 def autorizar_operacao(cargo : str, hora_atual: int , chave_emergencia: bool) -> str: 
     cargo = cargo.lower()
 
-# Condições de liberação 
+# Condição para liberar maquina
     if chave_emergencia or cargo == "supervisor" or (cargo == "operador" and 8 <= hora_atual <= 17):
         return "Acesso Permitido"
 
     return "Acesso Bloqueado"
 
 
-# Coleta de dados pelo terminal
-cargo_usuario = input("Digite o cargo (operador/supervisor): ")
-hora_usuario = int(input("Digite a hora atual (0 a 23): "))
-emergencia_usuario = input("A chave de emergência está ativa? (s/n): ").strip().lower() == "s"
-# Chamada da função e exibição
-resultado = autorizar_operacao(cargo_usuario, hora_usuario, emergencia_usuario)
+
+# Exibir resultado
+resultado = autorizar_operacao(cargo_usuario, hora_usuario, chave_emergencia)
 print(f"\nStatus: {resultado}")
 
 
