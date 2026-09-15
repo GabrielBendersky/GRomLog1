@@ -19,7 +19,7 @@ chave_emergencia = input("A chave de emergência está ativa? (s/n): "). strip()
 def autorizar_operacao(cargo : str, hora_atual: int , chave_emergencia: bool) -> str: 
     cargo = cargo.lower()
 
-# Condição para liberar maquina
+    # Condição para liberar maquina
     if chave_emergencia or cargo == "supervisor" or (cargo == "operador" and 8 <= hora_atual <= 17):
         return "Acesso Permitido"
 
