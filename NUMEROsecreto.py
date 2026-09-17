@@ -12,7 +12,7 @@ while tentativas > 0:
     tentativas -= 1  # Diminui 1 tentativa a cada palpite
 
     if palpite == numero_secreto:
-        print(f"\nParabéns! Você acertou o número {numero_secreto}!")
+        print(f"\nvocê é inteligente mesm,  brabo {numero_secreto}!")
         break
     elif palpite < numero_secreto:
         print("Tente um número MAIOR!")

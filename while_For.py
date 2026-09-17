@@ -20,6 +20,14 @@
 
 #construa uma pagina onde o usuario digitara um valor e o programa mostrara na tela a tabuada de multiplicação deste numero.
 numero = int(input("Digite um número: "))   
-for i in range(1, 11):
-    resultado = numero * i
-    print(f"{numero} x {i} = {resultado}")
+for i in range(0, 11):
+    resultado = numero * (i+1)
+    print(f"{numero} x {i+1} = {resultado}")
+
+
+
+
+i = 0
+while i < 10:
+    print(f"{numero} x {i+1} = {numero * (i+1)}")
+    i += 1
