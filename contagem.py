@@ -1,3 +1,11 @@
+#Exercício 5: Contagem de Valores Menores que um Limiar em Matriz
+#Retangular
+#Desenvolva um programa que leia os valores de uma matriz 2 × 4 de números
+#inteiros. O programa deve contar quantos valores estão abaixo de um limiar, que
+#também será informado pelo usuário, estão presentes na estrutura e exibir a
+#contagem total, além de imprimir a matriz completa formatada em linhas e colunas.
+
+
 def contagem_matriz_limiar():
     linhas = 2
     colunas = 4

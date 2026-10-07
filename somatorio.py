@@ -6,6 +6,8 @@
 
 
 def somatorio_impares():
+   
+   
     while True:
         A = int(input("Digite o valor de A (limite inferior): "))
         B = int(input("Digite o valor de B (limite superior): "))
