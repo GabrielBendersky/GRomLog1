@@ -1,0 +1,5 @@
+renan.duarte@email.com
+carlos.silva@outlook.com
+mariana_costa@gmail.com
+pedro.souza@empresa.br
+"""
