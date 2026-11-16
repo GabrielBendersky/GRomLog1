@@ -1,4 +1,23 @@
-#Leitura do arq. conta cpessoal.csv
+# Leitura do arq. conta pedidos.csv
+from pathlib import Path
+
+
+def localizar_arquivo(nomearq="pedidos.csv") -> Path:
+    pasta_script = Path(__file__).resolve().parent
+    caminhos = [
+        Path(nomearq),
+        pasta_script / nomearq,
+        pasta_script.parent / nomearq,
+        Path.cwd() / nomearq,
+        Path.cwd() / "Em casa" / nomearq,
+    ]
+
+    for caminho in caminhos:
+        if caminho.exists():
+            return caminho
+
+    return caminhos[0]
+
 
 def auditoria_pedidos(nomearq="pedidos.csv"):
     total_bruto = 0.0
@@ -8,16 +27,17 @@ def auditoria_pedidos(nomearq="pedidos.csv"):
 
     maiorPedido = None
     menorPedido = None
+    arquivo = localizar_arquivo(nomearq)
 
     try:
-        with open(nomearq, "r", encoding="utf-8") as arq:
-            cabeçalho = next(arq, None)
-            if cabeçalho is None:
+        with open(arquivo, "r", encoding="utf-8") as arq:
+            cabecalho = next(arq, None)
+            if cabecalho is None:
                 print("Arquivo vazio")
-                    
+                return
 
             print("=" * 80)
-            print(f"{'ID':<10}{'Cliente':<30}{'Valor Bruto':<15}{'Desconto':<15}{'Valor Liquido':<15}")
+            print(f"{'ID':<6}{'Cliente':<22}{'Valor Bruto':<14}{'Desconto':<12}{'Valor Liquido':<16}{'Status':<10}")
             print("=" * 80)
 
             for linha in arq:
@@ -33,7 +53,7 @@ def auditoria_pedidos(nomearq="pedidos.csv"):
                 cliente = campos[1]
                 produto = campos[2]
                 quantidade = int(campos[3])
-                valor_unitario = float(campos[4])
+                valor_unitario = float(campos[4].replace(",", "."))
 
                 valor_bruto = quantidade * valor_unitario
 
@@ -60,7 +80,7 @@ def auditoria_pedidos(nomearq="pedidos.csv"):
                 if menorPedido is None or valor_liquido < menorPedido["valor_liquido"]:
                     menorPedido = {"id": id_pedido, "cliente": cliente, "valor_liquido": valor_liquido}
 
-                print(f"{id_pedido:<6}{cliente:<20}{valor_bruto:<12.2f}{desconto:<13.2f}{valor_liquido:<12.2f}{status:<8}")
+                print(f"{id_pedido:<6}{cliente:<22}{valor_bruto:<14.2f}{desconto:<12.2f}{valor_liquido:<16.2f}{status:<10}")
 
             if total_pedidos == 0:
                 print("Nenhum pedido encontrado.")
@@ -73,11 +93,11 @@ def auditoria_pedidos(nomearq="pedidos.csv"):
             print(f"Total de Desconto Concedido: {total_desconto:.2f}")
             print(f"Faturamento Líquido Total: {total_liquido:.2f}")
             print(f"Quantidade de Pedidos Processados: {total_pedidos}")
-            print(f"Maior Pedido: {maiorPedido['id']} - {maiorPedido['cliente']} - {maiorPedido['valor_liquido']:.2f}")
-            print(f"Menor Pedido: {menorPedido['id']} - {menorPedido['cliente']} - {menorPedido['valor_liquido']:.2f}")
+            print(f"Maior Pedido: {maiorPedido['id']} - {maiorPedido['cliente']} - R$ {maiorPedido['valor_liquido']:.2f}")
+            print(f"Menor Pedido: {menorPedido['id']} - {menorPedido['cliente']} - R$ {menorPedido['valor_liquido']:.2f}")
 
     except FileNotFoundError:
-        print(f"Erro: O arquivo '{nomearq}' não foi encontrado.")
+        print(f"Erro: O arquivo '{arquivo}' não foi encontrado.")
     except Exception as e:
         print(f"Ocorreu um erro: {e}")
 

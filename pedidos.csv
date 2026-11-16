@@ -1,4 +1,4 @@
-id_pedido;cliente;produto;quantidade;preco_unitario
+id;cliente;produto;quantidade;preco_unitario
 101;Oficina Alfa;Teclado Mecanico;4;150.00
 102;Metalurgica Beta;Monitor 27;12;85.50
 103;AutoPecas Gama;Mouse Pad Gamer;8;210.00
